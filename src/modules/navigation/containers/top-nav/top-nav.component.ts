@@ -11,7 +11,11 @@ export class TopNavComponent implements OnInit {
   isLoggedIn = false;
   isOnPost = false;
   isMenuCollapsed = true;
+  isShowMenu = false;
   ngOnInit() {
     this.isLoggedIn = false;
+  }
+  showAccount() {
+    this.isShowMenu = !this.isShowMenu;
   }
 }
