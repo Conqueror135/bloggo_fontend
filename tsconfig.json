@@ -2,8 +2,22 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "src",
     "outDir": "./dist/out-tsc",
+    "paths": {
+      "@app/*": [
+          "app/*"
+      ],
+      "@common/*": [
+          "modules/app-common/*"
+      ],
+      "@modules/*": [
+          "modules/*"
+      ],
+      "@testing/*": [
+          "testing/*"
+      ]
+  },
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
