@@ -2,8 +2,9 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { TopNavComponent } from './containers/top-nav/top-nav.component';
-import { LayoutBlogComponent } from './layouts/layout-blog/layout-blog.component';
 import { AppCommonModule } from '@common/app-common.module';
+import { RouterModule } from '@angular/router';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 import * as appCommonLayouts from './layouts';
 
@@ -13,7 +14,12 @@ import * as appCommonLayouts from './layouts';
     TopNavComponent,
     ...appCommonLayouts.layouts,
   ],
-  imports: [CommonModule, AppCommonModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    AppCommonModule,
+    CollapseModule.forRoot(),
+  ],
   exports: [...appCommonLayouts.layouts],
 })
 export class NavigationModule {

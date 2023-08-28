@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-top-nav',
@@ -12,6 +13,7 @@ export class TopNavComponent implements OnInit {
   isOnPost = false;
   isMenuCollapsed = true;
   isShowMenu = false;
+  constructor(private route: ActivatedRoute, private router: Router) {}
   ngOnInit() {
     this.isLoggedIn = false;
   }

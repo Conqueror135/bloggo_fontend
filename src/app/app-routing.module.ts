@@ -9,6 +9,13 @@ const routes: Routes = [
         (m) => m.BlogRoutingModule
       ),
   },
+  {
+    path: 'auth',
+    loadChildren: () =>
+      import('modules/auth/auth-routing.module').then(
+        (m) => m.AuthRoutingModule
+      ),
+  },
 ];
 
 @NgModule({

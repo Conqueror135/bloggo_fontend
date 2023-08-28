@@ -2,7 +2,7 @@
   <div class="container">
     <a class="navbar-brand" routerLink="/">Bloggo</a
     ><button
-      class="navbar-toggler navbar-toggler-right no-border"
+      class="navbar-toggler navbar-toggler-right collapsed no-border"
       type="button"
       (click)="isMenuCollapsed = !isMenuCollapsed"
       aria-controls="navbarResponsive"
@@ -13,7 +13,7 @@
     </button>
     <div
       class="collapse navbar-collapse navbar-collapse-right"
-      [ngbCollapse]="isMenuCollapsed"
+      [collapse]="isMenuCollapsed"
     >
       <ul class="navbar-nav ml-auto">
         <li class="nav-item"><a class="nav-link" routerLink="/">Home</a></li>
@@ -21,16 +21,12 @@
           <a class="nav-link" routerLink="/about">About</a>
         </li>
         <li class="nav-item" *ngIf="!isLoggedIn">
-          <a class="btn btn-primary" href="" target="_blank">Login</a>
+          <a class="btn btn-primary" routerLink="/auth/login">Login</a>
         </li>
         <li class="nav-item" *ngIf="!isLoggedIn">
-          <a class="nav-link icon" href="" target="_blank">Register</a>
+          <a class="btn" routerLink="/auth/register">Register</a>
         </li>
       </ul>
-      <form class="form-inline ml-lg-2" *ngIf="isLoggedIn">
-        <a class="btn btn-primary" routerLink="/new">New Post</a>
-      </form>
-
       <div class="dropdown" *ngIf="isLoggedIn">
         <a
           class="text-reset d-flex align-items-center hidden-arrow"
