@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppCommonModule } from '@common/app-common.module';
+import { NavigationModule } from '@modules/navigation/navigation.module';
 
 import * as authContainers from './containers';
 import * as authServices from './services';
@@ -17,6 +18,7 @@ import * as authServices from './services';
     ModalModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
+    NavigationModule,
   ],
   exports: [...authContainers.containers],
   providers: [...authServices.services],

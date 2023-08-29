@@ -6,13 +6,20 @@ import { AppCommonModule } from '@common/app-common.module';
 import { RouterModule } from '@angular/router';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 
+import { LayoutAuthComponent } from './layouts/layout-auth/layout-auth.component';
+import { TopNavAuthComponent } from './containers/top-nav-auth/top-nav-auth.component';
+
 import * as appCommonLayouts from './layouts';
+import { FooterComponent } from './containers/footer/footer.component';
 
 @NgModule({
   declarations: [
     NavigationComponent,
     TopNavComponent,
     ...appCommonLayouts.layouts,
+    LayoutAuthComponent,
+    TopNavAuthComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,
