@@ -8,6 +8,10 @@ export const ROUTES: Routes = [
     path: '',
     component: blogContainers.HomeComponent,
   },
+  {
+    path: 'about',
+    component: blogContainers.AboutComponent,
+  },
 ];
 
 @NgModule({

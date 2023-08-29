@@ -5,15 +5,20 @@ import { from, Observable, throwError, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { LoginRequest } from '../types/login-request.interface';
 import { LoginResponse } from '../types/login-response.interface';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class AuthService {
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
 
   login$(loginPayload: LoginRequest): Observable<boolean> {
     return this.http
       .post<LoginResponse>(
-        `http://172.20.10.8:3003/api/users/login`,
+        ` http://10.10.20.45:3003/api/users/login`,
         loginPayload
       )
       .pipe(
@@ -22,9 +27,15 @@ export class AuthService {
         }),
         switchMap((token) => {
           localStorage.setItem('token', token);
+          this.toastr.success('Đăng nhập thành công!');
+
           return from(this.router.navigate(['/']));
         }),
-        catchError((error: Error) => throwError(error))
+        catchError((error: Error) => {
+          this.toastr.error('Tài khoản hoặc mật khẩu không chính xác!');
+
+          return throwError(() => error);
+        })
       );
   }
 }

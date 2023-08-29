@@ -8,6 +8,7 @@ import { NavigationModule } from '@modules/navigation/navigation.module';
 import { AppCommonModule } from '@common/app-common.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthModule } from '@modules/auth/auth.module';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,7 @@ import { AuthModule } from '@modules/auth/auth.module';
     AuthModule.forRoot(),
     HttpClientModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
