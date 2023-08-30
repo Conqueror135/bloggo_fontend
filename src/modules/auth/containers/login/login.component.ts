@@ -7,7 +7,21 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@modules/auth/services';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { Store, select } from '@ngrx/store';
+import {
+  isSubmittingSelector,
+  validationErrorsSelector,
+} from '@modules/auth/store/selectors';
+import { Observable } from 'rxjs';
+import { BackendErrorsInterface } from '@shared/types/backendErrors.interface';
+import { loginAction } from '@modules/auth/store/actions/login.action';
+import { LoginRequestInterface } from '@modules/auth/types/login-request.interface';
 
 @Component({
   selector: 'app-login',
@@ -16,30 +30,39 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  loginForm = this.fb.group({
-    username: ['', [Validators.required, Validators.minLength(1)]],
-    password: ['', [Validators.required, Validators.minLength(1)]],
-  });
+  form!: FormGroup;
+  isSubmitting$?: Observable<boolean>;
+  backendErrors$?: Observable<BackendErrorsInterface | null>;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  constructor(private fb: FormBuilder, private store: Store) {}
 
-  ngOnInit() {}
-  onSubmit() {
-    if (this.loginForm.status === 'VALID') {
-      this.authService
-        .login$({
-          username: this.loginForm.value.username as string,
-          password: this.loginForm.value.password as string,
-        })
-        .subscribe();
-    }
-
-    // tslint:disable-next-line: forin
-    // for (const key in this.loginForm.controls) {
-    //   const control = this.loginForm.controls[key];
-    //   control.markAllAsTouched();
-    // }
+  ngOnInit(): void {
+    this.initializeForm();
+    this.initializeValues();
   }
+  initializeValues(): void {
+    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
+    this.backendErrors$ = this.store.pipe(select(validationErrorsSelector));
+  }
+
+  initializeForm(): void {
+    this.form = this.fb.group({
+      username: ['', [Validators.required, Validators.minLength(1)]],
+      password: ['', [Validators.required, Validators.minLength(1)]],
+    });
+  }
+
+  onSubmit(): void {
+    const request: LoginRequestInterface = this.form.value;
+
+    this.store.dispatch(loginAction({ request }));
+  }
+  // tslint:disable-next-line: forin
+  // for (const key in this.loginForm.controls) {
+  //   const control = this.loginForm.controls[key];
+  //   control.markAllAsTouched();
+  // }
+  // }
 
   /* LOgin google */
 

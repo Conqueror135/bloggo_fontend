@@ -8,6 +8,13 @@ import { NavigationModule } from '@modules/navigation/navigation.module';
 
 import * as authContainers from './containers';
 import * as authServices from './services';
+import { PersistanceService } from '@shared/services/persistance.service';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { reducers } from './store/reducers';
+import { LoginEffect } from './store/effects/login.effect';
+import { LogoutEffect } from './store/effects/logout.effect';
+import { RegisterEffect } from './store/effects/register.effect';
 
 @NgModule({
   declarations: [...authContainers.containers],
@@ -19,9 +26,11 @@ import * as authServices from './services';
     FormsModule,
     ReactiveFormsModule,
     NavigationModule,
+    StoreModule.forFeature('auth', reducers),
+    EffectsModule.forFeature([LoginEffect, LogoutEffect, RegisterEffect]),
   ],
   exports: [...authContainers.containers],
-  providers: [...authServices.services],
+  providers: [...authServices.services, PersistanceService],
 })
 export class AuthModule {
   static forRoot(): ModuleWithProviders<AuthModule> {
