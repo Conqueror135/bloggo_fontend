@@ -23,6 +23,13 @@ const routes: Routes = [
         (m) => m.ArticleRoutingModule
       ),
   },
+  {
+    path: 'user',
+    loadChildren: () =>
+      import('modules/user/user-routing.module').then(
+        (m) => m.UserRoutingModule
+      ),
+  },
 ];
 
 @NgModule({

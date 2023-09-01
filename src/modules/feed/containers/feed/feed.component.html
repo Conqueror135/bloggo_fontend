@@ -14,35 +14,20 @@
     *ngFor="let article of (feed$ | async)?.data?.docs"
   >
     <div class="article-meta">
-      <a [routerLink]="['/profiles', article.user.username]">
-        <img [src]="article.user.image || 'assets/img/avatar-smile.png'" />
+      <a [routerLink]="['/user', 'profile', article.user._id]">
+        <img [src]="article.user.avatar || 'assets/img/avatar-smile.png'" />
       </a>
       <div class="info">
-        <a [routerLink]="['/profiles', article.user.username]" class="user">
+        <a [routerLink]="['/user', 'profile', article.user._id]" class="user">
           {{ article.user.username }}
         </a>
         <span class="date">{{ article.created_at }}</span>
       </div>
-      <!-- <div class="pull-xs-right">
-        <mc-add-to-favorites
-          [isFavorited]="article.favorited"
-          [articleSlug]="article.slug"
-          [favoritesCount]="article.favoritesCount"
-        >
-        </mc-add-to-favorites> 
-      </div>-->
     </div>
     <a [routerLink]="['article', 'detail', article._id]" class="preview-link">
       <h1>{{ article.title }}</h1>
       <p>{{ article.subtitle }}</p>
       <span>Read more..</span>
-      <!-- <mc-tag-list [tags]="article.tagList"></mc-tag-list> -->
     </a>
   </div>
-  <!-- <mc-pagination
-    [total]="(feed$ | async)?.articlesCount"
-    [limit]="limit"
-    [url]="baseUrl"
-    [currentPage]="currentPage"
-  ></mc-pagination> -->
 </div>

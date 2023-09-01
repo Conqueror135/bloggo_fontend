@@ -1,8 +1,11 @@
 <nav
   class="navbar navbar-expand-lg navbar-light fixed-top"
   id="mainNav"
-  [ngClass]="{ 'navbar-dark-mode': darkMode }"
-  [ngClass]="{ 'custom-nav-fixed': isFixed, 'custom-nav-scrolled': isScrolled }"
+  [ngClass]="{
+    'custom-nav-fixed': isFixed,
+    'custom-nav-scrolled': isScrolled,
+    'navbar-dark-mode': darkMode
+  }"
 >
   <div class="container">
     <a class="navbar-brand" routerLink="/">Bloggo</a
@@ -50,7 +53,9 @@
           aria-expanded="false"
         >
           <img
-            [src]="'assets/img/avatar-smile.png'"
+            [src]="
+              (currentUser$ | async)?.avatar || 'assets/img/avatar-smile.png'
+            "
             class="rounded-circle ml-4"
             height="30"
             alt=""
@@ -61,7 +66,13 @@
           class="dropdown-menu dropdown-menu-end"
           aria-labelledby="navbarDropdownMenuLink"
         >
-          <li><a class="dropdown-item" href="#">My profile</a></li>
+          <li>
+            <a
+              class="dropdown-item"
+              [routerLink]="['/user', 'profile', (currentUser$ | async)?._id]"
+              >My profile</a
+            >
+          </li>
           <li><a class="dropdown-item" href="#">Settings</a></li>
           <li>
             <a class="dropdown-item" (click)="logout()" type="button">Logout</a>

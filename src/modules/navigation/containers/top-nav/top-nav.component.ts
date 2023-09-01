@@ -2,9 +2,13 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { isLoggedInSelector } from '@modules/auth/store/selectors';
+import {
+  currentUserSelector,
+  isLoggedInSelector,
+} from '@modules/auth/store/selectors';
 import { logoutAction } from '@modules/auth/store/actions/logout.action';
 import { map } from 'rxjs/operators';
+import { UserInfoInterface } from '@shared/types/userInfo.interface';
 
 @Component({
   selector: 'app-top-nav',
@@ -17,6 +21,7 @@ export class TopNavComponent implements OnInit {
   subscription: Subscription = new Subscription();
   isLoggedIn$!: Observable<boolean>;
   isUnLoggedIn$!: Observable<boolean>;
+  currentUser$!: Observable<UserInfoInterface | null>;
   isOnPost = false;
   isMenuCollapsed = true;
   isShowMenu = false;
@@ -36,6 +41,7 @@ export class TopNavComponent implements OnInit {
     this.isUnLoggedIn$ = this.store
       .pipe(select(isLoggedInSelector))
       .pipe(map((value) => !value ?? false));
+    this.currentUser$ = this.store.pipe(select(currentUserSelector));
   }
   showAccount() {
     this.isShowMenu = !this.isShowMenu;

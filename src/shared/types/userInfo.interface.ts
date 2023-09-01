@@ -6,6 +6,7 @@ export interface UserInfoInterface {
   username: string;
   fullname: string | null;
   phone: string | null;
+  avatar: string | null;
   is_admin: boolean | null;
   token: string;
 }
