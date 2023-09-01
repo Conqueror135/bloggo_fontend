@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { isLoggedInSelector } from '@modules/auth/store/selectors';
 import { logoutAction } from '@modules/auth/store/actions/logout.action';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-top-nav',
@@ -12,7 +13,8 @@ import { logoutAction } from '@modules/auth/store/actions/logout.action';
 })
 export class TopNavComponent implements OnInit {
   subscription: Subscription = new Subscription();
-  isLoggedIn = false;
+  isLoggedIn$!: Observable<boolean>;
+  isUnLoggedIn$!: Observable<boolean>;
   isOnPost = false;
   isMenuCollapsed = true;
   isShowMenu = false;
@@ -22,9 +24,12 @@ export class TopNavComponent implements OnInit {
     private store: Store
   ) {}
   ngOnInit() {
-    this.store.pipe(select(isLoggedInSelector)).subscribe((data) => {
-      this.isLoggedIn = data != null ? data : false;
-    });
+    this.isLoggedIn$ = this.store
+      .pipe(select(isLoggedInSelector))
+      .pipe(map((value) => value ?? false));
+    this.isUnLoggedIn$ = this.store
+      .pipe(select(isLoggedInSelector))
+      .pipe(map((value) => !value ?? false));
   }
   showAccount() {
     this.isShowMenu = !this.isShowMenu;

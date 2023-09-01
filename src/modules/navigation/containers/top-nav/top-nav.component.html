@@ -20,16 +20,25 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/about">About</a>
         </li>
-        <li class="nav-item" *ngIf="!isLoggedIn">
+
+        <li class="nav-item" *ngIf="isUnLoggedIn$ | async">
           <a class="btn btn-primary" routerLink="/auth/login">Login</a>
         </li>
-        <li class="nav-item" *ngIf="!isLoggedIn">
+        <li class="nav-item" *ngIf="isUnLoggedIn$ | async">
           <a class="btn" routerLink="/auth/register">Register</a>
         </li>
+
+        <li class="nav-item" *ngIf="isLoggedIn$ | async">
+          <a class="btn btn-primary" routerLink="/auth/login">New Post</a>
+        </li>
       </ul>
-      <div class="dropdown" *ngIf="isLoggedIn">
+      <div
+        class="dropdown"
+        style="margin-left: 20px"
+        *ngIf="isLoggedIn$ | async"
+      >
         <a
-          class="text-reset d-flex align-items-center hidden-arrow"
+          class="text-reset d-flex align-items-center hidden-arrow ml-4"
           id="navbarDropdownMenuLink"
           role="button"
           data-bs-toggle="dropdown"
@@ -37,7 +46,7 @@
         >
           <img
             src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
-            class="rounded-circle"
+            class="rounded-circle ml-4"
             height="30"
             alt=""
             loading="lazy"

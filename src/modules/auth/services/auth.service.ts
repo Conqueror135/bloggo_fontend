@@ -22,7 +22,7 @@ export class AuthService {
   // login$(loginPayload: LoginRequest): Observable<boolean> {
   //   return this.http
   //     .post<LoginResponse>(
-  //       ` http://10.10.20.45:3003/api/users/login`,
+  //       ` http://172.20.10.8:3003/api/users/login`,
   //       loginPayload
   //     )
   //     .pipe(
@@ -62,5 +62,9 @@ export class AuthService {
     return this.http
       .post<UserInfoInterface>(url, data)
       .pipe(map(this.getUserInfo));
+  }
+  getCurrentUser(): Observable<UserInfoInterface> {
+    const url = environment.apiUrl + '/users/me';
+    return this.http.get<UserInfoInterface>(url).pipe(map(this.getUserInfo));
   }
 }

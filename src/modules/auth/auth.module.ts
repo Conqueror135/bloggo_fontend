@@ -15,6 +15,7 @@ import { reducers } from './store/reducers';
 import { LoginEffect } from './store/effects/login.effect';
 import { LogoutEffect } from './store/effects/logout.effect';
 import { RegisterEffect } from './store/effects/register.effect';
+import { GetCurrentUserEffect } from './store/effects/getCurrentUser.effect';
 
 @NgModule({
   declarations: [...authContainers.containers],
@@ -27,7 +28,12 @@ import { RegisterEffect } from './store/effects/register.effect';
     ReactiveFormsModule,
     NavigationModule,
     StoreModule.forFeature('auth', reducers),
-    EffectsModule.forFeature([LoginEffect, LogoutEffect, RegisterEffect]),
+    EffectsModule.forFeature([
+      LoginEffect,
+      LogoutEffect,
+      GetCurrentUserEffect,
+      RegisterEffect,
+    ]),
   ],
   exports: [...authContainers.containers],
   providers: [...authServices.services, PersistanceService],
