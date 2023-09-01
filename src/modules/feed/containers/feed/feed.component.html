@@ -1,4 +1,14 @@
-<div *ngIf="feed$ | async">
+<div
+  *ngIf="feed$ | async"
+  infinite-scroll
+  [infiniteScrollDistance]="1"
+  [infiniteScrollUpDistance]="1"
+  [infiniteScrollThrottle]="300"
+  (scrolled)="onScrollDown($event)"
+  (scrolledUp)="onScrollUp($event)"
+>
+  {{ setPage(feed$ | async) }}
+
   <div
     class="article-preview"
     *ngFor="let article of (feed$ | async)?.data?.docs"

@@ -6,6 +6,7 @@ import {
   getFeedFailureAction,
   getFeedSuccessAction,
 } from './actions/getFeed.action';
+import { GetFeedResponseInterface } from '../types/getFeedResponse.interface';
 
 const initialState: FeedStateInterface = {
   data: null,
@@ -22,14 +23,41 @@ const feedReducer = createReducer(
       isLoading: true,
     })
   ),
-  on(
-    getFeedSuccessAction,
-    (state, action): FeedStateInterface => ({
+  on(getFeedSuccessAction, (state, action): FeedStateInterface => {
+    let oldArticles = state.data?.data?.docs ?? [];
+    let newArticles = action.feed?.data?.docs ?? [];
+    let mergedArticles = [...oldArticles, ...newArticles];
+    const {
+      hasNextPage,
+      hasPrevPage,
+      limit,
+      nextPage,
+      page,
+      pagingCounter,
+      prevPage,
+      totalDocs,
+      totalPages,
+    } = action.feed.data;
+    const updatedFeed = {
+      data: {
+        docs: mergedArticles,
+        hasNextPage,
+        hasPrevPage,
+        limit,
+        nextPage,
+        page,
+        pagingCounter,
+        prevPage,
+        totalDocs,
+        totalPages,
+      },
+    };
+    return {
       ...state,
       isLoading: false,
-      data: action.feed,
-    })
-  ),
+      data: updatedFeed,
+    };
+  }),
   on(
     getFeedFailureAction,
     (state): FeedStateInterface => ({

@@ -2,6 +2,7 @@
   class="navbar navbar-expand-lg navbar-light fixed-top"
   id="mainNav"
   [ngClass]="{ 'navbar-dark-mode': darkMode }"
+  [ngClass]="{ 'custom-nav-fixed': isFixed, 'custom-nav-scrolled': isScrolled }"
 >
   <div class="container">
     <a class="navbar-brand" routerLink="/">Bloggo</a
@@ -70,3 +71,6 @@
     </div>
   </div>
 </nav>
+<main (window:scroll)="onScroll($event)">
+  <ng-content></ng-content>
+</main>

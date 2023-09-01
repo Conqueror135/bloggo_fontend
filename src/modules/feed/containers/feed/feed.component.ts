@@ -34,6 +34,7 @@ export class FeedComponent implements OnInit, OnDestroy, OnChanges {
   baseUrl!: string;
   queryParamsSubscription!: Subscription;
   currentPage!: number;
+  dataFeed!: GetFeedResponseInterface | null;
 
   constructor(
     private store: Store,
@@ -87,5 +88,24 @@ export class FeedComponent implements OnInit, OnDestroy, OnChanges {
     });
     const apiUrlWithParams = `${parsedUrl.url}?${stringifiedParams}`;
     this.store.dispatch(getFeedAction({ url: apiUrlWithParams }));
+  }
+  setPage(data: GetFeedResponseInterface | null) {
+    this.dataFeed = data;
+  }
+  onScrollDown(ev: any) {
+    if (this.dataFeed?.data.hasNextPage) {
+      const parsedUrl = queryString.parseUrl(this.apiUrlProps);
+      const stringifiedParams = queryString.stringify({
+        limit: this.limit,
+        page: this.dataFeed?.data.nextPage,
+        ...parsedUrl.query,
+      });
+      const apiUrlWithParams = `${parsedUrl.url}?${stringifiedParams}`;
+      this.store.dispatch(getFeedAction({ url: apiUrlWithParams }));
+    }
+  }
+
+  onScrollUp(ev: any) {
+    console.log('scrolled up!', ev);
   }
 }

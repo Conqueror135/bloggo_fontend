@@ -8,6 +8,7 @@ import { GetFeedEffect } from './store/effects/getFeed.effect';
 import { StoreModule } from '@ngrx/store';
 import { RouterModule } from '@angular/router';
 import { reducers } from './store/reducers';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [...feedContainers.containers],
@@ -16,6 +17,7 @@ import { reducers } from './store/reducers';
     EffectsModule.forFeature([GetFeedEffect]),
     StoreModule.forFeature('feed', reducers),
     RouterModule,
+    InfiniteScrollModule,
   ],
   exports: [...feedContainers.containers],
 

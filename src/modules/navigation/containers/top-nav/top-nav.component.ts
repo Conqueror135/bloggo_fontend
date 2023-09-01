@@ -20,6 +20,10 @@ export class TopNavComponent implements OnInit {
   isOnPost = false;
   isMenuCollapsed = true;
   isShowMenu = false;
+
+  isFixed = true;
+  isScrolled = false;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -38,5 +42,16 @@ export class TopNavComponent implements OnInit {
   }
   logout(): void {
     this.store.dispatch(logoutAction());
+  }
+  onScroll(event: any) {
+    const scrollTop = event.target.scrollingElement.scrollTop;
+    const headerHeight = 350;
+    if (scrollTop > headerHeight) {
+      this.isFixed = false;
+      this.isScrolled = true;
+    } else {
+      this.isFixed = true;
+      this.isScrolled = false;
+    }
   }
 }
