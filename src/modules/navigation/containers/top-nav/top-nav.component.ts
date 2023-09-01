@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
@@ -12,6 +12,8 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./top-nav.component.scss'],
 })
 export class TopNavComponent implements OnInit {
+  @Input() darkMode!: boolean;
+
   subscription: Subscription = new Subscription();
   isLoggedIn$!: Observable<boolean>;
   isUnLoggedIn$!: Observable<boolean>;

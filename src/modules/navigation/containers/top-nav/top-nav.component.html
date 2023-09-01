@@ -1,4 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+<nav
+  class="navbar navbar-expand-lg navbar-light fixed-top"
+  id="mainNav"
+  [ngClass]="{ 'navbar-dark-mode': darkMode }"
+>
   <div class="container">
     <a class="navbar-brand" routerLink="/">Bloggo</a
     ><button
@@ -29,7 +33,7 @@
         </li>
 
         <li class="nav-item" *ngIf="isLoggedIn$ | async">
-          <a class="btn btn-primary" routerLink="/auth/login">New Post</a>
+          <a class="btn btn-primary" routerLink="/article/new">New Post</a>
         </li>
       </ul>
       <div

@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 
 @Component({
   selector: 'app-layout-blog',
@@ -7,6 +12,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./layout-blog.component.scss'],
 })
 export class LayoutBlogComponent implements OnInit {
+  @Input() darkMode!: boolean;
+
   constructor() {}
   ngOnInit() {}
 }

@@ -16,6 +16,13 @@ const routes: Routes = [
         (m) => m.AuthRoutingModule
       ),
   },
+  {
+    path: 'article',
+    loadChildren: () =>
+      import('modules/article/article-routing.module').then(
+        (m) => m.ArticleRoutingModule
+      ),
+  },
 ];
 
 @NgModule({

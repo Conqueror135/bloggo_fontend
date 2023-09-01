@@ -3,3 +3,10 @@
 .navbar-collapse-right {
   justify-content: right;
 }
+
+.navbar-dark-mode {
+  .navbar-brand,
+  .navbar-nav .nav-item .nav-link {
+    color: black !important;
+  }
+}

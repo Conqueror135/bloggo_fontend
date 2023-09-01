@@ -1,0 +1,52 @@
+<app-layout-blog [darkMode]="true">
+  <div class="article-page" [ngClass]="{ 'mt-5': false }">
+    <div class="banner article-banner">
+      <div class="container" *ngIf="article">
+        <h2>{{ article.title }}</h2>
+        <div class="article-meta">
+          <a routerLink="['/profiles', article.author.username]">
+            <img [src]="article.user.image" />
+          </a>
+          <div class="info">
+            <a
+              routerLink="['/profiles', article.author.username]"
+              class="article-author"
+            >
+              {{ article.user.username }}
+            </a>
+            <span class="date">
+              {{ article.created_at }}
+            </span>
+          </div>
+          <span *ngIf="isAuthor$ | async">
+            <a
+              routerLink="['/articles', article._id, 'edit']"
+              class="btn btn-outline-secondary btn-sm"
+            >
+              Edit Article
+            </a>
+            <button
+              class="btn btn-outline-danger btn-sm ms-1"
+              (click)="deleteArticle()"
+            >
+              Delete Article
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="container page">
+      <!-- <mc-loading *ngIf="isLoading$ | async"></mc-loading>
+      <mc-error-message *ngIf="error$ | async"></mc-error-message> -->
+
+      <div class="row article-content" *ngIf="article">
+        <div class="col-xs-12">
+          <div>
+            <p>{{ article.content }}</p>
+          </div>
+          <!-- <mc-tag-list [tags]="article.tagList"></mc-tag-list> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</app-layout-blog>

@@ -1,0 +1,14 @@
+<app-layout-blog>
+  <app-article-header
+    backgroundImage='url("assets/img/post-bg.jpg")'
+    heading="Bloggo"
+    subHeading="Write on your own life"
+    [siteHeading]="true"
+  ></app-article-header>
+  <app-article-form
+    [initialValues]="initialValues"
+    [isSubmitting]="isSubmitting$ | async"
+    [errors]="backendErrors$ | async"
+    (articleSubmit)="onSubmit($event)"
+  ></app-article-form>
+</app-layout-blog>
