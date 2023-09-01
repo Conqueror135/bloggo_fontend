@@ -5,7 +5,7 @@
         <h2>{{ article.title }}</h2>
         <div class="article-meta">
           <a routerLink="['/profiles', article.author.username]">
-            <img [src]="article.user.image" />
+            <img [src]="article.user.image || 'assets/img/avatar-smile.png'" />
           </a>
           <div class="info">
             <a
@@ -20,7 +20,7 @@
           </div>
           <span *ngIf="isAuthor$ | async">
             <a
-              routerLink="['/articles', article._id, 'edit']"
+              [routerLink]="['/article', 'edit', article._id]"
               class="btn btn-outline-secondary btn-sm"
             >
               Edit Article

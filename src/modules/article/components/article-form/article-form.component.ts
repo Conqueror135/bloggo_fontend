@@ -13,7 +13,7 @@ export class ArticleFormComponent {
 
   constructor(private fb: FormBuilder) {}
 
-  @Input('initialValues') initialValuesProps!: ArticleInputInterface;
+  @Input('initialValues') initialValuesProps!: ArticleInputInterface | null;
   @Input('isSubmitting') isSubmittingProps!: boolean | null;
   @Input('errors') errorsProps!: BackendErrorsInterface | null;
 
@@ -26,9 +26,9 @@ export class ArticleFormComponent {
 
   initializeForm(): void {
     this.form = this.fb.group({
-      title: this.initialValuesProps.title,
-      subtitle: this.initialValuesProps.subtitle,
-      content: this.initialValuesProps.content,
+      title: this.initialValuesProps?.title,
+      subtitle: this.initialValuesProps?.subtitle,
+      content: this.initialValuesProps?.content,
       // tagList: this.initialValuesProps.tagList.join(' '),
     });
   }

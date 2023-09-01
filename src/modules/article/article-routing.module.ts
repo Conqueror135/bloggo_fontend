@@ -8,6 +8,11 @@ export const ROUTES: Routes = [
     path: 'new',
     component: articleContainers.CreateArticleComponent,
   },
+
+  {
+    path: 'edit/:id',
+    component: articleContainers.EditArticleComponent,
+  },
   {
     path: 'detail/:id',
     component: articleContainers.ArticleComponent,

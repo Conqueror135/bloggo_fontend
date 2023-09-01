@@ -14,6 +14,8 @@ import { RouterModule } from '@angular/router';
 import { GetArticleEffect } from './store/effects/getArticle.effect';
 import { DeleteArticleEffect } from './store/effects/deleteArticle.effect';
 import { ArticleService } from './services/article.service';
+import { UpdateArticleEffect } from './store/effects/updateArticle.effect';
+import { EditArticleService } from './services/editArticle.service';
 
 @NgModule({
   declarations: [
@@ -30,10 +32,11 @@ import { ArticleService } from './services/article.service';
       CreateArticleEffect,
       GetArticleEffect,
       DeleteArticleEffect,
+      UpdateArticleEffect,
     ]),
     StoreModule.forFeature('article', reducers),
   ],
   exports: [...articleContainers.containers, ...articleComponents.components],
-  providers: [CreateArticleService, ArticleService],
+  providers: [CreateArticleService, ArticleService, EditArticleService],
 })
 export class ArticleModule {}

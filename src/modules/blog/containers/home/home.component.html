@@ -1,8 +1,17 @@
-<app-layout-blog
-  ><app-bloggo-header
-    backgroundImage='url("assets/img/home-bg.jpg")'
-    heading="Bloggo"
-    subHeading="Write on your own life"
-    [siteHeading]="true"
-  ></app-bloggo-header>
+<app-layout-blog>
+  <div>
+    <app-bloggo-header
+      backgroundImage='url("assets/img/home-bg.jpg")'
+      heading="Bloggo"
+      subHeading="Write on your own life"
+      [siteHeading]="true"
+    ></app-bloggo-header>
+    <div class="container page">
+      <div class="row">
+        <div class="col-md-9">
+          <app-feed [apiUrl]="apiUrl"></app-feed>
+        </div>
+      </div>
+    </div>
+  </div>
 </app-layout-blog>

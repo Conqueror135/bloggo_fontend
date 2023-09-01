@@ -14,6 +14,7 @@ import { Observable, Subscription } from 'rxjs';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  apiUrl = '/articles';
   subscription: Subscription = new Subscription();
   ngOnInit() {}
   ngOnDestroy() {
