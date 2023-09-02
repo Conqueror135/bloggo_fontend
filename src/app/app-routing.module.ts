@@ -31,6 +31,13 @@ const routes: Routes = [
         (m) => m.UserRoutingModule
       ),
   },
+  {
+    path: 'managements',
+    loadChildren: () =>
+      import('modules/management/management-routing.module').then(
+        (m) => m.ManagementRoutingModule
+      ),
+  },
 ];
 
 @NgModule({

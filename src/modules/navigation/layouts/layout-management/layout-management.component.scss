@@ -1,0 +1,37 @@
+@import "styles/styles.scss";
+
+.layout-management {
+  width: 100%;
+  background-color: #f0f2f5;
+  padding-top: 90px;
+  padding-bottom: 20px;
+  display: flex;
+  .layout-menu-left {
+    position: fixed;
+    width: 250px;
+    background-color: #ffffff;
+    font-size: 18px;
+  }
+  .layout-content-right {
+    font-size: 16px;
+    position: relative;
+    left: 270px;
+    width: calc(100% - 270px);
+    padding: 20px;
+    background-color: #ffffff;
+  }
+}
+@media only screen and (max-width: 769px) {
+  .layout-management {
+    flex-direction: column;
+    .layout-menu-left {
+      width: 100%;
+      position: relative;
+    }
+    .layout-content-right {
+      margin-top: 16px;
+      width: 100%;
+      left: 0;
+    }
+  }
+}

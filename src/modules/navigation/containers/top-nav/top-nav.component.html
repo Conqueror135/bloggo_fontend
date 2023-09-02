@@ -37,7 +37,7 @@
         </li>
 
         <li class="nav-item" *ngIf="isLoggedIn$ | async">
-          <a class="btn btn-primary" routerLink="/article/new">New Post</a>
+          <a class="nav-link" routerLink="/article/new">New Post</a>
         </li>
       </ul>
       <div
@@ -74,10 +74,9 @@
             >
           </li>
           <li *ngIf="(currentUser$ | async)?.is_sysadmin">
-            <a class="dropdown-item" href="#">Category management</a>
-          </li>
-          <li *ngIf="(currentUser$ | async)?.is_sysadmin">
-            <a class="dropdown-item" href="#">User management</a>
+            <a class="dropdown-item" routerLink="/managements/user"
+              >Managements</a
+            >
           </li>
           <li><a class="dropdown-item" href="#">Settings</a></li>
           <li>
@@ -88,6 +87,6 @@
     </div>
   </div>
 </nav>
-<main (window:scroll)="onScroll($event)">
+<!-- <main (window:scroll)="onScroll($event)">
   <ng-content></ng-content>
-</main>
+</main> -->

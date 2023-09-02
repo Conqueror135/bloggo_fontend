@@ -1,0 +1,32 @@
+<app-top-nav [darkMode]="darkMode" [distance]="distance" [finalState]="true">
+</app-top-nav>
+<div class="container-fluid layout-management">
+  <div class="layout-menu-left">
+    <aside id="sidebar" class="sidebar">
+      <nav class="nav flex-column">
+        <a
+          class="nav-link"
+          routerLink="/managements/user"
+          routerLinkActive="active"
+          >User management</a
+        >
+        <a
+          class="nav-link"
+          routerLink="/managements/catalog"
+          routerLinkActive="active"
+          >Catalog management</a
+        >
+        <a
+          class="nav-link"
+          routerLink="/managements/article"
+          routerLinkActive="active"
+          >Article management</a
+        >
+      </nav>
+    </aside>
+  </div>
+  <div class="layout-content-right">
+    <ng-content></ng-content>
+  </div>
+</div>
+<app-footer></app-footer>

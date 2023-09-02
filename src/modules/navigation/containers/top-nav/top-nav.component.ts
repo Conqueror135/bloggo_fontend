@@ -17,6 +17,8 @@ import { UserInfoInterface } from '@shared/types/userInfo.interface';
 })
 export class TopNavComponent implements OnInit {
   @Input() darkMode!: boolean;
+  @Input() distance!: number;
+  @Input() finalState!: boolean;
 
   subscription: Subscription = new Subscription();
   isLoggedIn$!: Observable<boolean>;
@@ -42,6 +44,10 @@ export class TopNavComponent implements OnInit {
       .pipe(select(isLoggedInSelector))
       .pipe(map((value) => !value ?? false));
     this.currentUser$ = this.store.pipe(select(currentUserSelector));
+    if (this.finalState) {
+      this.isFixed = false;
+      this.isScrolled = true;
+    }
   }
   showAccount() {
     this.isShowMenu = !this.isShowMenu;
@@ -49,15 +55,17 @@ export class TopNavComponent implements OnInit {
   logout(): void {
     this.store.dispatch(logoutAction());
   }
-  onScroll(event: any) {
-    const scrollTop = event.target.scrollingElement.scrollTop;
-    const headerHeight = 350;
-    if (scrollTop > headerHeight) {
-      this.isFixed = false;
-      this.isScrolled = true;
-    } else {
-      this.isFixed = true;
-      this.isScrolled = false;
-    }
-  }
+  // onScroll(event: any) {
+  //   if (!this.finalState) {
+  //     const scrollTop = event.target.scrollingElement.scrollTop;
+  //     const headerHeight = this.distance || 350;
+  //     if (scrollTop > headerHeight) {
+  //       this.isFixed = false;
+  //       this.isScrolled = true;
+  //     } else {
+  //       this.isFixed = true;
+  //       this.isScrolled = false;
+  //     }
+  //   }
+  // }
 }
