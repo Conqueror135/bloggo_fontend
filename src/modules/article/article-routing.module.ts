@@ -7,15 +7,18 @@ export const ROUTES: Routes = [
   {
     path: 'new',
     component: articleContainers.CreateArticleComponent,
+    data: { breadcrumb: { alias: 'New Article' } },
   },
 
   {
     path: 'edit/:id',
     component: articleContainers.EditArticleComponent,
+    data: { breadcrumb: { alias: 'Edit Article' } },
   },
   {
     path: 'detail/:id',
     component: articleContainers.ArticleComponent,
+    data: { breadcrumb: { alias: 'Detail Article' } },
   },
 ];
 

@@ -16,7 +16,7 @@ import { DeleteArticleEffect } from './store/effects/deleteArticle.effect';
 import { ArticleService } from './services/article.service';
 import { UpdateArticleEffect } from './store/effects/updateArticle.effect';
 import { EditArticleService } from './services/editArticle.service';
-
+import { AppbreadcrumbModule } from '@modules/appbreadcrumb/appbreadcrumb.module';
 @NgModule({
   declarations: [
     ...articleContainers.containers,
@@ -35,6 +35,7 @@ import { EditArticleService } from './services/editArticle.service';
       UpdateArticleEffect,
     ]),
     StoreModule.forFeature('article', reducers),
+    AppbreadcrumbModule,
   ],
   exports: [...articleContainers.containers, ...articleComponents.components],
   providers: [CreateArticleService, ArticleService, EditArticleService],

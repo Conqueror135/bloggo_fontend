@@ -16,7 +16,8 @@ import { environment } from 'environments/environment';
 import { PersistanceService } from '@shared/services/persistance.service';
 import { AuthInterceptor } from '@shared/services/authInterceptor.service';
 import { StoreModule } from '@ngrx/store';
-
+import { BreadcrumbService } from 'xng-breadcrumb';
+import { BreadcrumbModule } from 'xng-breadcrumb';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -35,6 +36,7 @@ import { StoreModule } from '@ngrx/store';
       logOnly: environment.production,
     }),
     EffectsModule.forRoot([]),
+    BreadcrumbModule,
   ],
   providers: [
     PersistanceService,
@@ -43,6 +45,7 @@ import { StoreModule } from '@ngrx/store';
       useClass: AuthInterceptor,
       multi: true,
     },
+    BreadcrumbService,
   ],
   bootstrap: [AppComponent],
 })

@@ -22,6 +22,7 @@ const routes: Routes = [
       import('modules/article/article-routing.module').then(
         (m) => m.ArticleRoutingModule
       ),
+    data: { breadcrumb: { alias: 'Article' } },
   },
   {
     path: 'user',
