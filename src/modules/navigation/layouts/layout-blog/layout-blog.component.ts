@@ -13,6 +13,7 @@ import {
 })
 export class LayoutBlogComponent implements OnInit {
   @Input() darkMode!: boolean;
+  @Input() distance!: number;
 
   constructor() {}
   ngOnInit() {}
