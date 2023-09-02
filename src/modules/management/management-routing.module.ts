@@ -16,6 +16,10 @@ export const ROUTES: Routes = [
     path: 'catalog',
     component: managementContainers.CatalogManagementComponent,
   },
+  {
+    path: 'article',
+    component: managementContainers.ArticleManagementComponent,
+  },
 ];
 
 @NgModule({

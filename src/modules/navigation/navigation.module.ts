@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { AppCommonModule } from '@common/app-common.module';
 import { RouterModule } from '@angular/router';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { NgIconsModule } from '@ng-icons/core';
+import { heroPencilSquare } from '@ng-icons/heroicons/outline';
 
 import * as appCommonLayouts from './layouts';
 import * as navigationContainers from './containers';
@@ -16,6 +18,7 @@ import * as navigationContainers from './containers';
     RouterModule,
     AppCommonModule,
     CollapseModule.forRoot(),
+    NgIconsModule.withIcons({ heroPencilSquare }),
   ],
   exports: [...appCommonLayouts.layouts],
 })
