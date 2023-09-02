@@ -12,6 +12,7 @@ import {
   updateArticleFailureAction,
 } from '../actions/updateArticle.action';
 import { ArticleInterface } from '@shared/types/article.interface';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class UpdateArticleEffect {
@@ -21,10 +22,12 @@ export class UpdateArticleEffect {
       switchMap(({ _id, articleInput }) => {
         return this.editArticleService.updateArticle(_id, articleInput).pipe(
           map((article: ArticleInterface) => {
+            this.toastr.success('Update article successfully!');
             return updateArticleSuccessAction({ article });
           }),
 
           catchError((errorResponse: HttpErrorResponse) => {
+            this.toastr.error('Update article failed!');
             return of(
               updateArticleFailureAction({ errors: errorResponse.error.errors })
             );
@@ -48,6 +51,7 @@ export class UpdateArticleEffect {
   constructor(
     private actions$: Actions,
     private editArticleService: EditArticleService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 }

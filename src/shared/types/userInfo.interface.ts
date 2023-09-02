@@ -8,5 +8,6 @@ export interface UserInfoInterface {
   phone: string | null;
   avatar: string | null;
   is_admin: boolean | null;
+  is_sysadmin: boolean | null;
   token: string;
 }

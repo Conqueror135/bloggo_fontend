@@ -23,12 +23,12 @@ export class LoginEffect {
         return this.authService.login(request).pipe(
           map((userInfo: UserInfoInterface) => {
             this.persistanceService.set('token', userInfo.token);
-            this.toastr.success('Đăng nhập thành công!');
+            this.toastr.success('Logged in successfully!');
             return loginSuccessAction({ userInfo });
           }),
 
           catchError((errorResponse: HttpErrorResponse) => {
-            this.toastr.error('Tài khoản hoặc mật khẩu không chính xác!');
+            this.toastr.error('Username or password is incorrect!');
             return of(
               loginFailureAction({ errors: errorResponse.error.errors })
             );

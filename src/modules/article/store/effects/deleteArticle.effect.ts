@@ -10,6 +10,7 @@ import {
   deleteArticleSuccessAction,
 } from '../actions/deleteArticle.action';
 import { ArticleService } from '@modules/article/services/article.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class DeleteArticleEffect {
@@ -19,10 +20,12 @@ export class DeleteArticleEffect {
       switchMap(({ _id }) => {
         return this.articleService.deleteArticle(_id).pipe(
           map(() => {
+            this.toastr.success('Delete article successfully!');
             return deleteArticleSuccessAction();
           }),
 
           catchError(() => {
+            this.toastr.error('Delete article failed!');
             return of(deleteArticleFailureAction());
           })
         );
@@ -44,6 +47,7 @@ export class DeleteArticleEffect {
   constructor(
     private actions$: Actions,
     private articleService: ArticleService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 }

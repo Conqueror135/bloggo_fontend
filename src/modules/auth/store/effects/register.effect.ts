@@ -24,12 +24,12 @@ export class RegisterEffect {
         return this.authService.register(request).pipe(
           map((userInfo: UserInfoInterface) => {
             this.persistanceService.set('token', userInfo.token);
-            this.toastr.success('Đăng ký tài khoản thành công!');
+            this.toastr.success('Successful account registration!');
             return registerSuccessAction({ userInfo });
           }),
 
           catchError((errorResponse: HttpErrorResponse) => {
-            this.toastr.error('Đăng ký tài khoản thất bại!');
+            this.toastr.error('Account registration failed!');
 
             return of(
               registerFailureAction({ errors: errorResponse.error.errors })

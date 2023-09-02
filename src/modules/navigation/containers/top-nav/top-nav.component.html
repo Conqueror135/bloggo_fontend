@@ -73,6 +73,12 @@
               >My profile</a
             >
           </li>
+          <li *ngIf="(currentUser$ | async)?.is_sysadmin">
+            <a class="dropdown-item" href="#">Category management</a>
+          </li>
+          <li *ngIf="(currentUser$ | async)?.is_sysadmin">
+            <a class="dropdown-item" href="#">User management</a>
+          </li>
           <li><a class="dropdown-item" href="#">Settings</a></li>
           <li>
             <a class="dropdown-item" (click)="logout()" type="button">Logout</a>

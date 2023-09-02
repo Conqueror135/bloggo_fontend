@@ -11,6 +11,7 @@ import {
 } from '../actions/createArticle.action';
 import { ArticleInterface } from '@shared/types/article.interface';
 import { CreateArticleService } from '@modules/article/services/createArticle.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class CreateArticleEffect {
@@ -20,10 +21,12 @@ export class CreateArticleEffect {
       switchMap(({ articleInput }) => {
         return this.createArticleService.createArticle(articleInput).pipe(
           map((article: ArticleInterface) => {
+            this.toastr.success('Create article successfully!');
             return createArticleSuccessAction({ article });
           }),
 
           catchError((errorResponse: HttpErrorResponse) => {
+            this.toastr.error('Create article failed!');
             return of(
               createArticleFailureAction({ errors: errorResponse.error.errors })
             );
@@ -47,6 +50,7 @@ export class CreateArticleEffect {
   constructor(
     private actions$: Actions,
     private createArticleService: CreateArticleService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 }
