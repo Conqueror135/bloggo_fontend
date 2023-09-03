@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { getListUserAction } from '@modules/management/store/actions/getListUser.action';
 import {
@@ -8,6 +8,7 @@ import {
 } from '@modules/management/store/selectors';
 import { GetListUserResponseInterface } from '@modules/management/types/getListUserResponse.interface';
 import { Store, select } from '@ngrx/store';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
@@ -16,6 +17,7 @@ import { Observable, Subscription } from 'rxjs';
   styleUrls: ['./user-management.component.scss'],
 })
 export class UserManagementComponent implements OnInit {
+  modalRef!: BsModalRef;
   listUsers$!: Observable<GetListUserResponseInterface | null>;
   error$!: Observable<string | null>;
   isLoading$!: Observable<boolean>;
@@ -23,7 +25,8 @@ export class UserManagementComponent implements OnInit {
   constructor(
     private store: Store,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private modalService: BsModalService
   ) {}
 
   currentPage = 1;
@@ -58,5 +61,8 @@ export class UserManagementComponent implements OnInit {
   }
   fetchListUser(): void {
     this.store.dispatch(getListUserAction());
+  }
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 }

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NavigationModule } from '@modules/navigation/navigation.module';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgIconsModule } from '@ng-icons/core';
 import {
   heroPencil,
@@ -20,18 +20,27 @@ import { UserManagementService } from './services/user-management.service';
 import { reducers } from './store/reducer';
 import { StoreModule } from '@ngrx/store';
 import { CatalogManagementService } from './services/catalog-management.service';
-import { GetListCatalogEffect } from './store/effects/getListCatalog.effect';
+import {
+  CreateCatalogEffect,
+  DeleteCatalogEffect,
+  GetListCatalogEffect,
+} from './store/effects/catalogManagement.effect';
 import { ArticleManagementService } from './services/article-managements.service';
 import { GetListArticleEffect } from './store/effects/getListArticle.action';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 
+import * as managementComponents from './components';
 @NgModule({
-  declarations: [...managementContainers.containers],
+  declarations: [
+    ...managementContainers.containers,
+    ...managementComponents.components,
+  ],
   imports: [
     CommonModule,
     RouterModule,
     NavigationModule,
 
+    ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     PaginationModule.forRoot(),
     FormsModule,
@@ -39,7 +48,9 @@ import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
     EffectsModule.forFeature([
       GetListUserEffect,
       GetListCatalogEffect,
+      CreateCatalogEffect,
       GetListArticleEffect,
+      DeleteCatalogEffect,
     ]),
     StoreModule.forFeature('managements', reducers),
     ModalModule,

@@ -1,7 +1,11 @@
 <app-layout-management [darkMode]="true" [distance]="50">
   <div class="catalog-management">
     <div class="btn-top-tables">
-      <button type="button" class="btn btn-primary">
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="openModal(template)"
+      >
         New catalog <ng-icon name="heroPlus"> </ng-icon>
       </button>
     </div>
@@ -15,7 +19,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let catalog of (listCatalogs$ | async)?.docs">
+          <tr *ngFor="let catalog of (listCatalogs$ | async)?.data?.docs">
             <td>{{ catalog._id }}</td>
             <td>{{ catalog.name }}</td>
             <td>
@@ -23,7 +27,11 @@
                 <button type="button" class="btn rounded-pill bg-transpảent">
                   <ng-icon name="heroPencil"></ng-icon>
                 </button>
-                <button type="button" class="btn ms-1 rounded-pill">
+                <button
+                  type="button"
+                  class="btn ms-1 rounded-pill"
+                  (click)="onDelete(catalog._id)"
+                >
                   <ng-icon name="heroTrash"> </ng-icon>
                 </button>
               </div>
@@ -32,11 +40,33 @@
         </tbody>
       </table>
     </div>
-
     <pagination
-      [totalItems]="(listCatalogs$ | async)?.totalDocs || 0"
+      [totalItems]="(listCatalogs$ | async)?.data?.totalDocs || 0"
       [(ngModel)]="currentPage"
       [itemsPerPage]="10"
     ></pagination>
+
+    <ng-template #template>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left h6">Add new catalog</h4>
+        <button
+          type="button"
+          class="close pull-right button-close-modal"
+          aria-label="Close"
+          (click)="modalRef.hide()"
+        >
+          <ng-icon name="heroXMark"></ng-icon>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-catalog-form
+          [initialValues]="initialValues"
+          [isSubmitting]="isSubmitting$ | async"
+          [errors]="backendErrors$ | async"
+          (formSubmit)="onSubmit($event)"
+          (formCancel)="onCancel()"
+        ></app-catalog-form>
+      </div>
+    </ng-template>
   </div>
 </app-layout-management>

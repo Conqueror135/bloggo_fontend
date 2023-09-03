@@ -10,7 +10,7 @@ import {
   getListCatalogAction,
   getListCatalogFailureAction,
   getListCatalogSuccessAction,
-} from './actions/getListCatalog.action';
+} from './actions/catalogManagement.action';
 import {
   getListArticleAction,
   getListArticleFailureAction,
