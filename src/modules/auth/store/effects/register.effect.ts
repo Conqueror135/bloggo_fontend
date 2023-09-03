@@ -24,12 +24,16 @@ export class RegisterEffect {
         return this.authService.register(request).pipe(
           map((userInfo: UserInfoInterface) => {
             this.persistanceService.set('token', userInfo.token);
-            this.toastr.success('Successful account registration!');
+            this.toastr.success('Successful account registration!', '', {
+              closeButton: true,
+            });
             return registerSuccessAction({ userInfo });
           }),
 
           catchError((errorResponse: HttpErrorResponse) => {
-            this.toastr.error('Account registration failed!');
+            this.toastr.error('Account registration failed!', '', {
+              closeButton: true,
+            });
 
             return of(
               registerFailureAction({ errors: errorResponse.error.errors })

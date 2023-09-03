@@ -20,12 +20,16 @@ export class DeleteArticleEffect {
       switchMap(({ _id }) => {
         return this.articleService.deleteArticle(_id).pipe(
           map(() => {
-            this.toastr.success('Delete article successfully!');
+            this.toastr.success('Delete article successfully!', '', {
+              closeButton: true,
+            });
             return deleteArticleSuccessAction();
           }),
 
           catchError(() => {
-            this.toastr.error('Delete article failed!');
+            this.toastr.error('Delete article failed!', '', {
+              closeButton: true,
+            });
             return of(deleteArticleFailureAction());
           })
         );

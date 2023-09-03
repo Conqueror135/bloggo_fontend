@@ -22,12 +22,16 @@ export class UpdateArticleEffect {
       switchMap(({ _id, articleInput }) => {
         return this.editArticleService.updateArticle(_id, articleInput).pipe(
           map((article: ArticleInterface) => {
-            this.toastr.success('Update article successfully!');
+            this.toastr.success('Update article successfully!', '', {
+              closeButton: true,
+            });
             return updateArticleSuccessAction({ article });
           }),
 
           catchError((errorResponse: HttpErrorResponse) => {
-            this.toastr.error('Update article failed!');
+            this.toastr.error('Update article failed!', '', {
+              closeButton: true,
+            });
             return of(
               updateArticleFailureAction({ errors: errorResponse.error.errors })
             );

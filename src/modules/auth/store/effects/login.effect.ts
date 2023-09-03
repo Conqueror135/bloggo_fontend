@@ -23,12 +23,16 @@ export class LoginEffect {
         return this.authService.login(request).pipe(
           map((userInfo: UserInfoInterface) => {
             this.persistanceService.set('token', userInfo.token);
-            this.toastr.success('Logged in successfully!');
+            this.toastr.success('Logged in successfully!', '', {
+              closeButton: true,
+            });
             return loginSuccessAction({ userInfo });
           }),
 
           catchError((errorResponse: HttpErrorResponse) => {
-            this.toastr.error('Username or password is incorrect!');
+            this.toastr.error('Username or password is incorrect!', '', {
+              closeButton: true,
+            });
             return of(
               loginFailureAction({ errors: errorResponse.error.errors })
             );

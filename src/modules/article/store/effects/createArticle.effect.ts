@@ -21,12 +21,16 @@ export class CreateArticleEffect {
       switchMap(({ articleInput }) => {
         return this.createArticleService.createArticle(articleInput).pipe(
           map((article: ArticleInterface) => {
-            this.toastr.success('Create article successfully!');
+            this.toastr.success('Create article successfully!', '', {
+              closeButton: true,
+            });
             return createArticleSuccessAction({ article });
           }),
 
           catchError((errorResponse: HttpErrorResponse) => {
-            this.toastr.error('Create article failed!');
+            this.toastr.error('Create article failed!', '', {
+              closeButton: true,
+            });
             return of(
               createArticleFailureAction({ errors: errorResponse.error.errors })
             );
