@@ -16,7 +16,9 @@
 .custom-nav-scrolled {
   background: #ffffff !important;
   box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.05);
-
+  .navbar-brand {
+    font-size: 25px;
+  }
   .navbar-brand,
   .navbar-nav .nav-item .nav-link {
     color: black !important;

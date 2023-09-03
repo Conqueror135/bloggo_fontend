@@ -1,3 +1,12 @@
 .user-management {
   width: 100%;
+  position: relative;
+}
+.btn-top-tables {
+  float: right;
+  margin-bottom: 16px;
+  button {
+    color: #ffffff !important;
+    border-radius: 5px;
+  }
 }
