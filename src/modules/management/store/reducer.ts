@@ -6,14 +6,20 @@ import {
   getListUserSuccessAction,
 } from './actions/getListUser.action';
 import { ManagementStateInterface } from '../types/managementState.interface';
+import {
+  getListCatalogAction,
+  getListCatalogFailureAction,
+  getListCatalogSuccessAction,
+} from './actions/getListCatalog.action';
 
 const initialState: ManagementStateInterface = {
   dataListUser: null,
+  dataListCatalog: null,
   isLoading: false,
   error: null,
 };
 
-const listUserReducer = createReducer(
+const managementReducer = createReducer(
   initialState,
   on(
     getListUserAction,
@@ -36,9 +42,30 @@ const listUserReducer = createReducer(
       isLoading: false,
     })
   ),
+  on(
+    getListCatalogAction,
+    (state): ManagementStateInterface => ({
+      ...state,
+      isLoading: true,
+    })
+  ),
+  on(getListCatalogSuccessAction, (state, action): ManagementStateInterface => {
+    return {
+      ...state,
+      isLoading: false,
+      dataListCatalog: action.listCatalog,
+    };
+  }),
+  on(
+    getListCatalogFailureAction,
+    (state): ManagementStateInterface => ({
+      ...state,
+      isLoading: false,
+    })
+  ),
   on(routerNavigationAction, (): ManagementStateInterface => initialState)
 );
 
 export function reducers(state: ManagementStateInterface, action: Action) {
-  return listUserReducer(state, action);
+  return managementReducer(state, action);
 }

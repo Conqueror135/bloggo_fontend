@@ -1,3 +1,42 @@
 <app-layout-management [darkMode]="true" [distance]="50">
-  <p>catalog-management works!</p>
+  <div class="catalog-management">
+    <div class="btn-top-tables">
+      <button type="button" class="btn btn-primary">
+        New catalog <ng-icon name="heroPlus"> </ng-icon>
+      </button>
+    </div>
+    <div class="container-table">
+      <table class="table table-striped table-hover table-bordered">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let catalog of (listCatalogs$ | async)?.docs">
+            <td>{{ catalog._id }}</td>
+            <td>{{ catalog.name }}</td>
+            <td>
+              <div class="btn-group">
+                <button type="button" class="btn rounded-pill bg-transpảent">
+                  <ng-icon name="heroPencil"></ng-icon>
+                </button>
+                <button type="button" class="btn ms-1 rounded-pill">
+                  <ng-icon name="heroTrash"> </ng-icon>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <pagination
+      [totalItems]="(listCatalogs$ | async)?.totalDocs || 0"
+      [(ngModel)]="currentPage"
+      [itemsPerPage]="10"
+    ></pagination>
+  </div>
 </app-layout-management>

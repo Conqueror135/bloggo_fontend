@@ -14,6 +14,8 @@ import { GetListUserEffect } from './store/effects/getListUser.effect';
 import { UserManagementService } from './services/user-management.service';
 import { reducers } from './store/reducer';
 import { StoreModule } from '@ngrx/store';
+import { CatalogManagementService } from './services/catalog-management.service';
+import { GetListCatalogEffect } from './store/effects/getListCatalog.effect';
 @NgModule({
   declarations: [...managementContainers.containers],
   imports: [
@@ -25,9 +27,9 @@ import { StoreModule } from '@ngrx/store';
     PaginationModule.forRoot(),
     FormsModule,
     NgIconsModule.withIcons({ heroPencil, heroTrash, heroPlus }),
-    EffectsModule.forFeature([GetListUserEffect]),
+    EffectsModule.forFeature([GetListUserEffect, GetListCatalogEffect]),
     StoreModule.forFeature('managements', reducers),
   ],
-  providers: [UserManagementService],
+  providers: [UserManagementService, CatalogManagementService],
 })
 export class ManagementModule {}

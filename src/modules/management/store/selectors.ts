@@ -18,3 +18,7 @@ export const listUserSelector = createSelector(
   managementFeatureSelector,
   (managementState: ManagementStateInterface) => managementState.dataListUser
 );
+export const listCatalogSelector = createSelector(
+  managementFeatureSelector,
+  (managementState: ManagementStateInterface) => managementState.dataListCatalog
+);

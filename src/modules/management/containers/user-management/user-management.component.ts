@@ -46,7 +46,6 @@ export class UserManagementComponent implements OnInit {
     this.queryParamsSubscription = this.route.queryParams.subscribe(
       (params: Params) => {
         this.currentPage = Number(params['page'] || '1');
-        console.log('fetchFeed');
         this.fetchListUser();
       }
     );
