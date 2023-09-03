@@ -1,3 +1,4 @@
+import { GetListArticleResponseInterface } from './getListArticleResponse.interface';
 import { GetListCatalogResponseInterface } from './getListCatalogResponse.interface';
 import { GetListUserResponseInterface } from './getListUserResponse.interface';
 
@@ -6,4 +7,5 @@ export interface ManagementStateInterface {
   error: string | null;
   dataListUser: GetListUserResponseInterface | null;
   dataListCatalog: GetListCatalogResponseInterface | null;
+  dataListArticle: GetListArticleResponseInterface | null;
 }

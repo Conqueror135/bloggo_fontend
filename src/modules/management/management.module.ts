@@ -5,7 +5,12 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { FormsModule } from '@angular/forms';
 import { NgIconsModule } from '@ng-icons/core';
-import { heroPencil, heroTrash, heroPlus } from '@ng-icons/heroicons/outline';
+import {
+  heroPencil,
+  heroTrash,
+  heroPlus,
+  heroXMark,
+} from '@ng-icons/heroicons/outline';
 import { RouterModule } from '@angular/router';
 
 import * as managementContainers from './containers';
@@ -16,6 +21,10 @@ import { reducers } from './store/reducer';
 import { StoreModule } from '@ngrx/store';
 import { CatalogManagementService } from './services/catalog-management.service';
 import { GetListCatalogEffect } from './store/effects/getListCatalog.effect';
+import { ArticleManagementService } from './services/article-managements.service';
+import { GetListArticleEffect } from './store/effects/getListArticle.action';
+import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
+
 @NgModule({
   declarations: [...managementContainers.containers],
   imports: [
@@ -26,10 +35,20 @@ import { GetListCatalogEffect } from './store/effects/getListCatalog.effect';
     BsDropdownModule.forRoot(),
     PaginationModule.forRoot(),
     FormsModule,
-    NgIconsModule.withIcons({ heroPencil, heroTrash, heroPlus }),
-    EffectsModule.forFeature([GetListUserEffect, GetListCatalogEffect]),
+    NgIconsModule.withIcons({ heroPencil, heroTrash, heroPlus, heroXMark }),
+    EffectsModule.forFeature([
+      GetListUserEffect,
+      GetListCatalogEffect,
+      GetListArticleEffect,
+    ]),
     StoreModule.forFeature('managements', reducers),
+    ModalModule,
   ],
-  providers: [UserManagementService, CatalogManagementService],
+  providers: [
+    UserManagementService,
+    CatalogManagementService,
+    ArticleManagementService,
+    BsModalService,
+  ],
 })
 export class ManagementModule {}

@@ -1,8 +1,8 @@
-import { CatalogInterface } from '@shared/types/catalog.interface';
+import { ArticleInterface } from '@shared/types/article.interface';
 
-export interface GetListCatalogResponseInterface {
+export interface GetListArticleResponseInterface {
   data: {
-    docs: CatalogInterface[];
+    docs: ArticleInterface[];
     totalDocs: number;
     limit: number;
     totalPages: number;

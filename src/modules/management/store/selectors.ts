@@ -22,3 +22,7 @@ export const listCatalogSelector = createSelector(
   managementFeatureSelector,
   (managementState: ManagementStateInterface) => managementState.dataListCatalog
 );
+export const listArticleSelector = createSelector(
+  managementFeatureSelector,
+  (managementState: ManagementStateInterface) => managementState.dataListArticle
+);

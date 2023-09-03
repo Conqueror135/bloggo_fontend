@@ -11,10 +11,16 @@ import {
   getListCatalogFailureAction,
   getListCatalogSuccessAction,
 } from './actions/getListCatalog.action';
+import {
+  getListArticleAction,
+  getListArticleFailureAction,
+  getListArticleSuccessAction,
+} from './actions/getListArticle.action';
 
 const initialState: ManagementStateInterface = {
   dataListUser: null,
   dataListCatalog: null,
+  dataListArticle: null,
   isLoading: false,
   error: null,
 };
@@ -58,6 +64,27 @@ const managementReducer = createReducer(
   }),
   on(
     getListCatalogFailureAction,
+    (state): ManagementStateInterface => ({
+      ...state,
+      isLoading: false,
+    })
+  ),
+  on(
+    getListArticleAction,
+    (state): ManagementStateInterface => ({
+      ...state,
+      isLoading: true,
+    })
+  ),
+  on(getListArticleSuccessAction, (state, action): ManagementStateInterface => {
+    return {
+      ...state,
+      isLoading: false,
+      dataListArticle: action.listArticle,
+    };
+  }),
+  on(
+    getListArticleFailureAction,
     (state): ManagementStateInterface => ({
       ...state,
       isLoading: false,

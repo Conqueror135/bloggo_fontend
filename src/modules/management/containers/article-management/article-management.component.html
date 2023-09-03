@@ -1,3 +1,37 @@
 <app-layout-management [darkMode]="true" [distance]="50">
-  <p>article-management works!</p>
+  <div class="user-management">
+    <div class="container-table">
+      <table class="table table-striped table-hover table-bordered">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of (listArticles$ | async)?.data?.docs">
+            <td>{{ user._id }}</td>
+            <td>{{ user.title }}</td>
+            <td>
+              <div class="btn-group">
+                <button type="button" class="btn rounded-pill bg-transpảent">
+                  <ng-icon name="heroPencil"></ng-icon>
+                </button>
+                <button type="button" class="btn ms-1 rounded-pill">
+                  <ng-icon name="heroTrash"> </ng-icon>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <pagination
+      [totalItems]="(listArticles$ | async)?.data?.totalDocs || 0"
+      [(ngModel)]="currentPage"
+      [itemsPerPage]="10"
+    ></pagination>
+  </div>
 </app-layout-management>

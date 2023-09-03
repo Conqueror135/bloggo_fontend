@@ -19,8 +19,6 @@ export class GetListUserEffect {
       switchMap(() => {
         return this.userManagementService.getListUser().pipe(
           map((listUser: GetListUserResponseInterface) => {
-            console.log('List user ', listUser);
-
             return getListUserSuccessAction({ listUser });
           }),
 
