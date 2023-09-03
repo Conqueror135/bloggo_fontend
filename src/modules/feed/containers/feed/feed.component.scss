@@ -6,6 +6,25 @@
   transition: 0.3s;
   border-radius: 10px;
   margin-bottom: 16px;
+  position: relative;
+  .btn-save-article {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    z-index: 10;
+    border: none;
+    background: transparent;
+    color: #acaaaa;
+    font-size: 20px;
+    font-weight: 200;
+    transition: transform 0.5s;
+
+    &:hover {
+      color: #5cb85c;
+      font-weight: 800;
+      transform: scale(1.25);
+    }
+  }
   .article-meta {
     display: block;
     position: relative;

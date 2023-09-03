@@ -9,6 +9,8 @@ import { StoreModule } from '@ngrx/store';
 import { RouterModule } from '@angular/router';
 import { reducers } from './store/reducers';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { heroBookmark, heroHeart } from '@ng-icons/heroicons/outline';
+import { NgIconsModule } from '@ng-icons/core';
 
 @NgModule({
   declarations: [...feedContainers.containers],
@@ -18,6 +20,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     StoreModule.forFeature('feed', reducers),
     RouterModule,
     InfiniteScrollModule,
+    NgIconsModule.withIcons({ heroBookmark, heroHeart }),
   ],
   exports: [...feedContainers.containers],
 

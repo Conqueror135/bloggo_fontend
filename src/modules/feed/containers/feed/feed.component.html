@@ -13,6 +13,9 @@
     class="article-preview"
     *ngFor="let article of (feed$ | async)?.data?.docs"
   >
+    <button class="btn-save-article">
+      <ng-icon name="heroHeart"> </ng-icon>
+    </button>
     <div class="article-meta">
       <a [routerLink]="['/user', 'profile', article.user._id]">
         <img [src]="article.user.avatar || 'assets/img/avatar-smile.png'" />
